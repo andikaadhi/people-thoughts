@@ -12,7 +12,7 @@ export const main = {
         primary: base.primary,
         secondary: base.secondary,
     },
-    btr: {
+    btn: {
         primary: {
             bg: base.secondary,
             text: base.primary,

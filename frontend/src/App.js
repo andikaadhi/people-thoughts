@@ -1,24 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import Thought from './views/Thought';
+import { globalStyles } from '@people/styles';
+import { Global, ThemeProvider } from '@emotion/react';
+import { main } from '@people/styles/themes/main';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={main}>
+      <Global style={globalStyles}/>
+      <Thought />
+    </ThemeProvider>
   );
 }
 
