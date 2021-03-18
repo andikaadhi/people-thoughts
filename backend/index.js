@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // cors
-// app.use(require('./config/cors'));
+app.use(require('./config/cors'));
 // Log request
 app.use(require('./middleware/httpLog'));
 // Routes
