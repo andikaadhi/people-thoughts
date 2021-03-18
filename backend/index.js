@@ -4,11 +4,14 @@ const bodyParser = require('body-parser');
 // config
 const { PORT } = require('./config');
 
+// socket
+const http = require('http').Server(app);
 const io = require('socket.io')(http);
 io.on('connection', (socket) => {
   console.log('a user connected');
 });
 
+// app
 const app = express();
 // body parse for http body request
 app.use(bodyParser.urlencoded({ extended: true }));
