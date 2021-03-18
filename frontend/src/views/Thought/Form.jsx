@@ -5,14 +5,19 @@ import { POST } from '../../api';
 
 export const Form = ({ open, setOpen }) => {
 
-    const [author, setAuthor] = useState(null);
-    const [content, setContent] = useState(null);
+    const [author, setAuthor] = useState('');
+    const [content, setContent] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = () => {
-        POST('/thoughts', { author, content }, null, () => setOpen(false), setIsSubmitting);
+    const resetForm = () => {
+        setAuthor('');
+        setContent('');
+        setOpen(false);
     }
 
+    const handleSubmit = () => {
+        POST('/thoughts', { author, content }, null, () => resetForm(), setIsSubmitting);
+    }
 
     return (
         <Modal
@@ -25,11 +30,11 @@ export const Form = ({ open, setOpen }) => {
             <Text size="small">
                 Your Name
             </Text>
-            <Input value={author} onChange={(ev) => setAuthor(ev.target.value)}/>
+            <Input id="author" type="text" value={author} onChange={(ev) => setAuthor(ev.target.value)}/>
             <Text size="small">
                 Your Thoughts
             </Text>
-            <Input value={content} onChange={(ev) => setContent(ev.target.value)}/>
+            <Input id="content" type="text" value={content} onChange={(ev) => setContent(ev.target.value)}/>
         </Modal>
     )
 }

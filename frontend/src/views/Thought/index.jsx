@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Container, Thoughts, CommentCard, Button } from "./styles";
-import { Heading } from "@people/styles";
+import { Heading, Text } from "@people/styles";
 import { Comment, Avatar } from "antd";
 import "antd/dist/antd.css";
 import { Form } from "./Form";
 
 import { GET } from "../../api";
+import socket from '../../socket';
+
+const convertToInitial = (name) => {
+  let initial = '';
+  if (name) {
+    const names = name.split(' ');
+    names.slice(0, 2).forEach((name) => initial = initial +  name[0])
+    return initial.toUpperCase();
+  }
+  return initial;
+}
 
 const Thought = () => {
   const [open, setOpen] = useState(false);
@@ -13,10 +24,11 @@ const Thought = () => {
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
+    socket.connect();
+    socket.on('new-thought', (thought) => setThoughts(values => [...values, thought]))
     GET("/thoughts", setThoughts, setIsFetching);
   }, []);
 
-  console.log(thoughts);
   return (
     !isFetching && (
       <Container>
@@ -26,7 +38,7 @@ const Thought = () => {
             thoughts.map((thought) => (
               <CommentCard>
                 <Comment
-                  author={<a>{thought.author}</a>}
+                  author={<Text size="small" style={{textTransform: 'capitalize'}} >{thought.author}</Text>}
                   avatar={
                     <Avatar
                       style={{
@@ -35,77 +47,13 @@ const Thought = () => {
                       }}
                       size="large"
                     >
-                      AA
+                      {convertToInitial(thought.author)}
                     </Avatar>
                   }
                   content={thought.content}
                 />
               </CommentCard>
-            ))}
-
-          <CommentCard>
-            <Comment
-              author={<a>Han Solo</a>}
-              avatar={
-                <Avatar
-                  style={{ backgroundColor: "blue", verticalAlign: "middle" }}
-                  size="large"
-                >
-                  AA
-                </Avatar>
-              }
-              content={
-                <p>
-                  We supply a series of design principles, practical patterns
-                  and high quality design resources (Sketch and Axure), to help
-                  people create their product prototypes beautifully and
-                  efficiently.
-                </p>
-              }
-            />
-          </CommentCard>
-          <CommentCard>
-            <Comment
-              author={<a>Han Solo</a>}
-              avatar={
-                <Avatar
-                  style={{ backgroundColor: "blue", verticalAlign: "middle" }}
-                  size="large"
-                >
-                  AA
-                </Avatar>
-              }
-              content={
-                <p>
-                  We supply a series of design principles, practical patterns
-                  and high quality design resources (Sketch and Axure), to help
-                  people create their product prototypes beautifully and
-                  efficiently.
-                </p>
-              }
-            />
-          </CommentCard>
-          <CommentCard>
-            <Comment
-              author={<a>Han Solo</a>}
-              avatar={
-                <Avatar
-                  style={{ backgroundColor: "blue", verticalAlign: "middle" }}
-                  size="large"
-                >
-                  AA
-                </Avatar>
-              }
-              content={
-                <p>
-                  We supply a series of design principles, practical patterns
-                  and high quality design resources (Sketch and Axure), to help
-                  people create their product prototypes beautifully and
-                  efficiently.
-                </p>
-              }
-            />
-          </CommentCard>
+            ))}          
         </Thoughts>
         <Button type="primary" onClick={() => setOpen(true)}>Share My Thought</Button>
         <Form open={open} setOpen={setOpen} />

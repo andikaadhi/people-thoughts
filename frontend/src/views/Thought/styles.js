@@ -14,6 +14,7 @@ export const Thoughts = styled.div`
     width: 100%;
     padding-top: 20px;
     text-align: left;
+    padding-bottom: 100px;
 `
 
 export const CommentCard = styled.div`
@@ -25,7 +26,7 @@ export const CommentCard = styled.div`
 `
 
 export const Button = styled(button)`
-    width: 100%;
+    width: 90%;
     position: fixed !Important;
     max-width: 800px;
     transform: translateX(-50%);
