@@ -1,7 +1,33 @@
 import styled from '@emotion/styled';
+import { Button as button } from '@people/styles';
 
 export const Container = styled.div`
-    width: 100%;
+    position: relative;
+    width: 90%;
     max-width: 800px;
+    min-height: 100vh;
     margin: auto;
+    text-align: center;
+`
+
+export const Thoughts = styled.div`
+    width: 100%;
+    padding-top: 20px;
+    text-align: left;
+`
+
+export const CommentCard = styled.div`
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    border-radius: 10px;
+    padding: 8px 16px;
+    margin: 20px 0;
+    box-sizing: border-box;
+`
+
+export const Button = styled(button)`
+    width: 100%;
+    position: fixed !Important;
+    max-width: 800px;
+    transform: translateX(-50%);
+    bottom: 20px;
 `
