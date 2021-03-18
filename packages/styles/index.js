@@ -33,7 +33,13 @@ export const Button = styled(MuiButton)`
         background-color: ${props => props.theme.btn[props.type || 'primary'].bg};
         color: ${props => props.theme.btn[props.type || 'primary'].text};
         border-radius: 10px;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 50px;
+        padding-right: 50px;
+        height: 50px;
     }
+`
+
+export const Input = styled.input`
+    height: 50px;
+    border-radius: 10px;
 `
