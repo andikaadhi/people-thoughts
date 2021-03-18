@@ -1,18 +1,20 @@
 // express
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 // config
 const { PORT } = require('./config');
 
 // socket
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-io.on('connection', (socket) => {
-  console.log('a user connected');
+const httpServer = require("http").createServer(app);
+const io = require("socket.io")(httpServer, {
+  cors: {
+    origin: process.env.FRONTEND_HOST,
+    methods: ["GET", "POST"]
+  }
 });
+app.io = io;
 
-// app
-const app = express();
 // body parse for http body request
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -24,8 +26,14 @@ app.use(require('./middleware/httpLog'));
 app.use('/', require('./routes'));
 // Error Handling
 app.use(require('./middleware/errorHandler'));
+
+io.on('connection', (socket) => {
+  socket.emit('hello', 1);
+  console.log('a user connected');
+});
+
 // LISTEN - start serve
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`SERVER LISTEN ON PORT ${PORT}`);
 });

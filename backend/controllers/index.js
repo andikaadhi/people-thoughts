@@ -14,6 +14,7 @@ const controllers = {
     try {
       const { author, content } = req.body;
       const response = await Service.addThought(author, content);
+      if (response) req.app.io.emit('new-thought', response);
       res.send(response);
     } catch (err) {
       next(err);
