@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'antd';
-import { Input, TextArea, Text } from '@people/styles';
+import { Input, TextArea } from '@people/styles';
 import { POST } from '../../api';
 import { FormText } from './styles';
 
@@ -17,7 +17,7 @@ export const Form = ({ open, setOpen }) => {
     }
 
     const handleSubmit = () => {
-        POST('/thoughts', { author, content }, null, () => resetForm(), setIsSubmitting);
+        if(!isSubmitting) POST('/thoughts', { author, content }, null, () => resetForm(), setIsSubmitting);
     }
 
     return (
@@ -36,6 +36,8 @@ export const Form = ({ open, setOpen }) => {
             <FormText size="small">
                 Your Thoughts
             </FormText>
+            <div style={{height: '16px'}}></div>
+            {isSubmitting && 'Submitting your thought...'}
             <TextArea rows="5" id="content" type="text" value={content} onChange={(ev) => setContent(ev.target.value)}/>
         </Modal>
     )
