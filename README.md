@@ -10,11 +10,11 @@ Tech Stack : NodeJs, Express, ReactJs, Socket.Io
 1. Install dependencies menggunakan yarn atau npm
 2. Server terdapat di folder backend dan Client terdapat di folder frontend
 3. Buat file .env pada folder backend dan frontend
-    contoh format .env pada backend:
-    PORT=8000
-    FRONTEND_HOST=http://localhost:3000
+    contoh format .env pada backend:\
+    PORT=8000\
+    FRONTEND_HOST=http://localhost:3000\
     
-    contoh format .env pada frontend:
+    contoh format .env pada frontend:\
     REACT_APP_BACKEND_URL=http://localhost:8000
 4. Jalankan frontend dan backend menggunakan yarn start atau npm start
 
