@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'antd';
-import { Input, Text } from '@people/styles';
+import { Input, TextArea, Text } from '@people/styles';
 import { POST } from '../../api';
+import { FormText } from './styles';
 
 export const Form = ({ open, setOpen }) => {
 
@@ -21,20 +22,21 @@ export const Form = ({ open, setOpen }) => {
 
     return (
         <Modal
-          title="Vertically centered modal dialog"
+          title="Your Thoughts"
           centered
           visible={open}
           onOk={handleSubmit}
           onCancel={() => setOpen(false)}
         >
-            <Text size="small">
+            <FormText size="small">
                 Your Name
-            </Text>
+            </FormText>
             <Input id="author" type="text" value={author} onChange={(ev) => setAuthor(ev.target.value)}/>
-            <Text size="small">
+            <div style={{height: '16px'}}></div>
+            <FormText size="small">
                 Your Thoughts
-            </Text>
-            <Input id="content" type="text" value={content} onChange={(ev) => setContent(ev.target.value)}/>
+            </FormText>
+            <TextArea rows="5" id="content" type="text" value={content} onChange={(ev) => setContent(ev.target.value)}/>
         </Modal>
     )
 }

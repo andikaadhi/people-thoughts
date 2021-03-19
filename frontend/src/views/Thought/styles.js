@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button as button } from '@people/styles';
+import { Button as button, Text } from '@people/styles';
 
 export const Container = styled.div`
     position: relative;
@@ -31,4 +31,15 @@ export const Button = styled(button)`
     max-width: 800px;
     transform: translateX(-50%);
     bottom: 20px;
+`
+
+export const FormText = styled(Text)`
+    padding-bottom: 8px;
+`
+
+export const PreviewImage = styled.img`
+    width: 90%;
+    max-width: 300px;
+    margin: auto;
+    display: block;
 `
